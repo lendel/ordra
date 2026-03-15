@@ -7,10 +7,10 @@ import { useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
-  Platform,
   Pressable,
   StyleSheet,
   Text,
+  View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { z } from 'zod';
@@ -41,11 +41,10 @@ export default function AddCategoryModal() {
   return (
     <KeyboardAvoidingView
       style={[styles.screen, { backgroundColor: colors.background }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior="padding"
+      keyboardVerticalOffset={80}
     >
-      <KeyboardAvoidingView
-        style={[styles.container, { paddingBottom: Math.max(Spacing.xl, bottomInset) }]}
-      >
+      <View style={[styles.container, { paddingBottom: Math.max(Spacing.xl, bottomInset) }]}>
         <FlatInput
           label="Название"
           placeholder="Введите название категории…"
@@ -66,7 +65,7 @@ export default function AddCategoryModal() {
         >
           <Text style={styles.btnText}>Создать</Text>
         </Pressable>
-      </KeyboardAvoidingView>
+      </View>
     </KeyboardAvoidingView>
   );
 }

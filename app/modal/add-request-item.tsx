@@ -110,7 +110,8 @@ function CatalogTab({
     return (
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior="padding"
+        keyboardVerticalOffset={80}
       >
         <View style={[styles.confirmBox, { backgroundColor: colors.background }]}>
           <Pressable onPress={() => setSelected(null)} style={styles.backBtn}>
@@ -262,7 +263,8 @@ function NewProductTab({
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, backgroundColor: colors.background }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior="padding"
+        keyboardVerticalOffset={80}
     >
       <View style={styles.newProductContainer}>
         <FlatInput

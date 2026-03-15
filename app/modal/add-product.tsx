@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 import {
   Alert,
   KeyboardAvoidingView,
-  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -76,7 +75,8 @@ export default function AddProductModal() {
   return (
     <KeyboardAvoidingView
       style={[styles.screen, { backgroundColor: colors.background }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior="padding"
+      keyboardVerticalOffset={80}
     >
       <View style={[styles.container, { paddingBottom: Math.max(Spacing.xl, bottomInset) }]}>
         <FlatInput
