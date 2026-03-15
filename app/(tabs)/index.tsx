@@ -4,9 +4,10 @@ import { useThemeColors } from '@/hooks/useThemeColors';
 import { Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import { useCatalogStore } from '@/stores/useCatalogStore';
 import { useRequestStore } from '@/stores/useRequestStore';
+import { FlashList } from '@shopify/flash-list';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function progressBarColor(pct: number): string {
@@ -42,145 +43,143 @@ export default function DashboardScreen() {
     .slice(0, 5);
 
   return (
-    <ScrollView
-      style={[styles.screen, { backgroundColor: colors.background }]}
-      contentContainerStyle={[styles.content, { paddingTop: insets.top + Spacing.xl }]}
-    >
-      <Text style={[styles.heading, { color: colors.text }]}>Дашборд</Text>
+    <View style={[styles.screen, { backgroundColor: colors.background }]}>
+      {/* Статичная верхняя часть */}
+      <View style={{ paddingTop: insets.top + Spacing.xl }}>
+        <Text style={[styles.heading, { color: colors.text }]}>Дашборд</Text>
 
-      {/* Метрики */}
-      <View style={[styles.metrics, { borderColor: colors.separator }]}>
-        {/* Товары */}
-        <View style={[styles.metric, { borderRightColor: colors.separator }]}>
-          <Text style={[styles.metricLabel, { color: colors.secondaryText }]}>ТОВАРОВ</Text>
-          <Text style={[styles.metricValue, { color: colors.text }]}>{productCount}</Text>
+        {/* Метрики */}
+        <View style={[styles.metrics, { borderColor: colors.separator }]}>
+          <View style={[styles.metric, { borderRightColor: colors.separator }]}>
+            <Text style={[styles.metricLabel, { color: colors.secondaryText }]}>ТОВАРОВ</Text>
+            <Text style={[styles.metricValue, { color: colors.text }]}>{productCount}</Text>
+          </View>
+          <View style={styles.metric}>
+            <Text style={[styles.metricLabel, { color: colors.secondaryText }]}>ЗАЯВОК</Text>
+            <Text style={[styles.metricValue, { color: colors.text }]}>{totalRequests}</Text>
+            {totalRequests > 0 && (
+              <View style={styles.metricSub}>
+                {completedCount > 0 && (
+                  <Text style={[styles.metricSubText, { color: '#3B5C1E' }]}>
+                    {completedCount} вып.
+                  </Text>
+                )}
+                {completedCount > 0 && sentCount > 0 && (
+                  <Text style={[styles.metricSubDot, { color: colors.secondaryText }]}>·</Text>
+                )}
+                {sentCount > 0 && (
+                  <Text style={[styles.metricSubText, { color: '#C8956C' }]}>
+                    {sentCount} в работе
+                  </Text>
+                )}
+              </View>
+            )}
+          </View>
         </View>
 
-        {/* Заявки */}
-        <View style={styles.metric}>
-          <Text style={[styles.metricLabel, { color: colors.secondaryText }]}>ЗАЯВОК</Text>
-          <Text style={[styles.metricValue, { color: colors.text }]}>{totalRequests}</Text>
-          {totalRequests > 0 && (
-            <View style={styles.metricSub}>
-              {completedCount > 0 && (
-                <Text style={[styles.metricSubText, { color: '#3B5C1E' }]}>
-                  {completedCount} вып.
-                </Text>
-              )}
-              {completedCount > 0 && sentCount > 0 && (
-                <Text style={[styles.metricSubDot, { color: colors.secondaryText }]}>·</Text>
-              )}
-              {sentCount > 0 && (
-                <Text style={[styles.metricSubText, { color: '#C8956C' }]}>
-                  {sentCount} в работе
-                </Text>
-              )}
-            </View>
-          )}
-        </View>
+        {/* Прогресс получения */}
+        <Text style={[styles.sectionHeader, { color: colors.secondaryText }]}>
+          Прогресс получения
+        </Text>
+
+        {sentRequests.length === 0 ? (
+          <View style={[styles.emptySection, { borderColor: colors.separator }]}>
+            <Text style={[styles.emptyText, { color: colors.secondaryText }]}>
+              Нет отправленных заявок
+            </Text>
+          </View>
+        ) : (
+          sentRequests.map((req, i) => {
+            const pct = req.item_count > 0 ? Math.round((req.received_count / req.item_count) * 100) : 0;
+            const barColor = progressBarColor(pct);
+            return (
+              <Pressable
+                key={req.id}
+                onPress={() => router.push(`/request/${req.id}`)}
+                style={({ pressed }) => [
+                  styles.progressRow,
+                  {
+                    opacity: pressed ? 0.6 : 1,
+                    borderBottomColor: colors.separator,
+                    borderTopWidth: i === 0 ? StyleSheet.hairlineWidth : 0,
+                    borderTopColor: colors.separator,
+                  },
+                ]}
+              >
+                <View style={styles.progressTop}>
+                  <Text style={[styles.progressTitle, { color: colors.text }]} numberOfLines={1}>
+                    {req.title}
+                  </Text>
+                  <Text style={[styles.progressCount, { color: colors.secondaryText }]}>
+                    {req.received_count}/{req.item_count}
+                  </Text>
+                </View>
+                <View style={[styles.progressTrack, { backgroundColor: colors.separator }]}>
+                  <View
+                    style={[
+                      styles.progressFill,
+                      { width: pct > 0 ? `${pct}%` : '100%', backgroundColor: barColor },
+                    ]}
+                  />
+                </View>
+                <View style={styles.progressBottom}>
+                  <Text style={[styles.progressPct, { color: barColor }]}>{pct}%</Text>
+                  <PriceLabel value={req.total} />
+                </View>
+              </Pressable>
+            );
+          })
+        )}
+
+        {/* Заголовок секции цен */}
+        <Text style={[styles.sectionHeader, { color: colors.secondaryText }]}>
+          Последние изменения цен
+        </Text>
       </View>
 
-      {/* Прогресс получения */}
-      <Text style={[styles.sectionHeader, { color: colors.secondaryText }]}>
-        Прогресс получения
-      </Text>
-
-      {sentRequests.length === 0 ? (
-        <View style={[styles.emptySection, { borderColor: colors.separator }]}>
-          <Text style={[styles.emptyText, { color: colors.secondaryText }]}>
-            Нет отправленных заявок
-          </Text>
-        </View>
+      {/* Скроллируемый список последних цен */}
+      {recentPrices.length === 0 ? (
+        <EmptyState message="Добавьте первый товар в каталоге" icon="📊" />
       ) : (
-        sentRequests.map((req, i) => {
-          const pct = req.item_count > 0 ? Math.round((req.received_count / req.item_count) * 100) : 0;
-          const barColor = progressBarColor(pct);
-          return (
+        <FlashList
+          data={recentPrices}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item, index }) => (
             <Pressable
-              key={req.id}
-              onPress={() => router.push(`/request/${req.id}`)}
+              onPress={() => router.push(`/product/${item.id}`)}
               style={({ pressed }) => [
-                styles.progressRow,
+                styles.row,
                 {
                   opacity: pressed ? 0.6 : 1,
                   borderBottomColor: colors.separator,
-                  borderTopWidth: i === 0 ? StyleSheet.hairlineWidth : 0,
+                  borderTopWidth: index === 0 ? StyleSheet.hairlineWidth : 0,
                   borderTopColor: colors.separator,
                 },
               ]}
             >
-              <View style={styles.progressTop}>
-                <Text style={[styles.progressTitle, { color: colors.text }]} numberOfLines={1}>
-                  {req.title}
+              <View style={styles.rowLeft}>
+                <Text style={[styles.rowName, { color: colors.text }]} numberOfLines={1}>
+                  {item.name}
                 </Text>
-                <Text style={[styles.progressCount, { color: colors.secondaryText }]}>
-                  {req.received_count}/{req.item_count}
+                <Text style={[styles.rowDate, { color: colors.secondaryText }]}>
+                  {new Date(item.updated_at).toLocaleDateString('ru-RU', {
+                    day: '2-digit',
+                    month: '2-digit',
+                  })}
                 </Text>
               </View>
-
-              {/* Трек */}
-              <View style={[styles.progressTrack, { backgroundColor: colors.separator }]}>
-                <View
-                  style={[
-                    styles.progressFill,
-                    { width: pct > 0 ? `${pct}%` : '100%', backgroundColor: barColor },
-                  ]}
-                />
-              </View>
-
-              <View style={styles.progressBottom}>
-                <Text style={[styles.progressPct, { color: barColor }]}>{pct}%</Text>
-                <PriceLabel value={req.total} />
-              </View>
+              <PriceLabel value={item.current_price} />
             </Pressable>
-          );
-        })
+          )}
+          contentContainerStyle={{ paddingBottom: 96 }}
+        />
       )}
-
-      {/* Последние изменения цен */}
-      <Text style={[styles.sectionHeader, { color: colors.secondaryText }]}>
-        Последние изменения цен
-      </Text>
-
-      {recentPrices.length === 0 ? (
-        <EmptyState message="Добавьте первый товар в каталоге" icon="📊" />
-      ) : (
-        recentPrices.map((p, i) => (
-          <Pressable
-            key={p.id}
-            onPress={() => router.push(`/product/${p.id}`)}
-            style={({ pressed }) => [
-              styles.row,
-              {
-                opacity: pressed ? 0.6 : 1,
-                borderBottomColor: colors.separator,
-                borderTopWidth: i === 0 ? StyleSheet.hairlineWidth : 0,
-                borderTopColor: colors.separator,
-              },
-            ]}
-          >
-            <View style={styles.rowLeft}>
-              <Text style={[styles.rowName, { color: colors.text }]} numberOfLines={1}>
-                {p.name}
-              </Text>
-              <Text style={[styles.rowDate, { color: colors.secondaryText }]}>
-                {new Date(p.updated_at).toLocaleDateString('ru-RU', {
-                  day: '2-digit',
-                  month: '2-digit',
-                })}
-              </Text>
-            </View>
-            <PriceLabel value={p.current_price} />
-          </Pressable>
-        ))
-      )}
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: { flex: 1 },
-  content: { paddingBottom: 96 },
 
   heading: {
     fontFamily: Fonts.bold,
@@ -293,9 +292,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.lg,
-    paddingVertical: Spacing.md,
+    paddingVertical: Spacing.sm,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    minHeight: 56,
+    minHeight: 44,
   },
   rowLeft: {
     flex: 1,
