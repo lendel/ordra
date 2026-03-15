@@ -505,21 +505,6 @@ export default function RequestDetailScreen() {
         </>
       )}
 
-      {/* Итог */}
-      {items.length > 0 && (
-        <View
-          style={[
-            styles.footer,
-            {
-              borderTopColor: colors.separator,
-              paddingBottom: Math.max(insets.bottom, Spacing.md),
-            },
-          ]}
-        >
-          <Text style={[styles.footerLabel, { color: colors.secondaryText }]}>ИТОГО</Text>
-          <PriceLabel value={total} size="lg" />
-        </View>
-      )}
 
       {isEditable && (
         <FAB
@@ -632,19 +617,6 @@ const styles = StyleSheet.create({
     color: '#8B2020',
   },
 
-  // Итог
-  footer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: Spacing.lg,
-    paddingTop: Spacing.md,
-    borderTopWidth: StyleSheet.hairlineWidth,
-  },
-  footerLabel: {
-    ...SECTION_HEADER_STYLE,
-    fontFamily: Fonts.semiBold,
-  },
 
   // Модал
   modalOuter: {
