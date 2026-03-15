@@ -396,7 +396,7 @@ export default function RequestDetailScreen() {
               accessibilityRole="button"
               accessibilityLabel="Поделиться заявкой"
             >
-              <Ionicons name="share-outline" size={22} color={Primary} />
+              <Ionicons name="share-outline" size={22} color={colors.tint} />
             </Pressable>
           )}
           {isDraft && (

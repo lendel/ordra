@@ -99,7 +99,7 @@ export default function CategoryDetailScreen() {
               accessibilityRole="button"
               accessibilityLabel="Экспортировать категорию в PDF"
             >
-              <Ionicons name="share-outline" size={22} color={Primary} />
+              <Ionicons name="share-outline" size={22} color={colors.tint} />
             </Pressable>
           )}
           <Pressable
