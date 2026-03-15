@@ -82,7 +82,7 @@ export function ExportImageCard({ title, subtitle, rows, footer, pageLabel }: Ex
 
       {/* Подвал */}
       <View style={styles.bottomBar}>
-        <Text style={styles.brand}>ZAYAVKA</Text>
+        <Text style={styles.brand}>ORDRA</Text>
         {pageLabel ? <Text style={styles.pageLabel}>{pageLabel}</Text> : null}
       </View>
     </View>

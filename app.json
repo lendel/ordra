@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Zayavka",
-    "slug": "Zayavka",
-    "version": "1.0.0",
+    "name": "Ordra",
+    "slug": "ordra",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "zayavka",
+    "scheme": "ordra",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash-icon.png",
@@ -23,7 +23,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.voanerges.Zayavka"
+      "package": "com.voanerges.ordra"
     },
     "web": {
       "bundler": "metro",
