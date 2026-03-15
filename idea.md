@@ -6,7 +6,7 @@ Core Requirements:
 
 Stack: Expo, expo-sqlite, zustand, @shopify/flash-list.
 
-Database: >    - Create products table (id, name, current_price, updated_at).
+Database: > - Create products table (id, name, current_price, updated_at).
 
 Create price_history table (id, product_id, price, date).
 

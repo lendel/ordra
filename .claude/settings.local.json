@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm show:*)",
+      "Bash(npm run:*)",
+      "Bash(npx prettier:*)",
+      "Bash(npm test:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where npm:*)",
+      "Bash(where node:*)",
+      "Bash(where npx:*)",
+      "Bash(npx expo:*)",
+      "Bash(adb devices:*)",
+      "Bash(netstat -ano)",
+      "Bash(findstr 8081)",
+      "Bash(npx tsc:*)",
+      "Bash(node --max-old-space-size=4096 ./node_modules/.bin/tsc --noEmit)",
+      "Bash(NODE_OPTIONS=\"--max-old-space-size=4096\" npx tsc --noEmit)",
+      "Bash(node --max-old-space-size=8192 \"node_modules/typescript/bin/tsc\" --noEmit)",
+      "Bash(ls \"C:\\\\Users\\\\lende\\\\.claude\\\\projects\\\\E--Projects-Zayavka\\\\memory\"\" 2>/dev/null || echo \"empty \")",
+      "Bash(node \"node_modules/typescript/bin/tsc\" --noEmit --skipLibCheck)",
+      "Bash(find C:/Users/lende/.claude/plugins/cache/claude-plugins-official/frontend-design/2cd88e7947b7 -name *.json)",
+      "Bash(node -e \"const p = require\\(''./node_modules/react-native-view-shot/package.json''\\); console.log\\(p.version, p.peerDependencies?.[''react-native'']\\)\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

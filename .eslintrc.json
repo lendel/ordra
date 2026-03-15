@@ -1,0 +1,7 @@
+{
+  "extends": "expo",
+  "rules": {
+    "no-console": "warn"
+  },
+  "ignorePatterns": ["dist/", ".expo/", "node_modules/"]
+}
