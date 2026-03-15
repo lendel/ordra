@@ -8,6 +8,7 @@ import { FlashList } from '@shopify/flash-list';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function CategoryRow({ item, isLast: _isLast }: { item: Category; isLast: boolean }) {
   const colors = useThemeColors();
@@ -35,6 +36,7 @@ export default function CategoriesScreen() {
   const colors = useThemeColors();
   const router = useRouter();
   const { categories, load } = useCategoryStore();
+  const insets = useSafeAreaInsets();
 
   useFocusEffect(
     useCallback(() => {
@@ -56,7 +58,7 @@ export default function CategoriesScreen() {
           contentContainerStyle={styles.list}
         />
       )}
-      <FAB onPress={() => router.push('/modal/add-category')} />
+      <FAB onPress={() => router.push('/modal/add-category')} bottomInset={insets.bottom} />
     </View>
   );
 }
