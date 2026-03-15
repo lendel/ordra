@@ -16,7 +16,7 @@ export function Card({ children, style, noPadding, ...rest }: CardProps) {
         styles.card,
         {
           backgroundColor: colors.surface,
-          shadowColor: '#000',
+          shadowColor: '#2D1B0E',
         },
         !noPadding && styles.padding,
         style,
