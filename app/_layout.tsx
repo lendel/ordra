@@ -80,7 +80,6 @@ function RootLayoutNav() {
             name="modal/add-request-item"
             options={{ title: 'Добавить товар', presentation: 'modal', headerShown: true }}
           />
-          <Stack.Screen name="categories" options={{ title: 'Категории' }} />
           <Stack.Screen name="category/[id]" options={{ title: 'Категория' }} />
           <Stack.Screen
             name="modal/add-category"

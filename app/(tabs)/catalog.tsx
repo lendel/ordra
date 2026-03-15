@@ -129,14 +129,6 @@ export default function CatalogScreen() {
               autoCapitalize="none"
             />
           </View>
-          <Pressable
-            onPress={() => router.push('/categories')}
-            style={[styles.iconBtn, { backgroundColor: colors.surface, borderColor: colors.separator }]}
-            accessibilityLabel="Категории"
-            accessibilityRole="button"
-          >
-            <Ionicons name="pricetags-outline" size={20} color={colors.tint} />
-          </Pressable>
           {products.length > 0 && (
             <Pressable
               onPress={handleExportCatalog}
