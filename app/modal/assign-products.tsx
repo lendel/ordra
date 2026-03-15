@@ -1,6 +1,6 @@
 import { PriceLabel } from '@/components/ui/PriceLabel';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Accent, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
+import { Primary, Fonts, FontSizes, Radius, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import type { ProductWithCategory } from '@/db/types';
 import { categoryService } from '@/services/categoryService';
 import { productService } from '@/services/productService';
@@ -71,8 +71,8 @@ export default function AssignProductsModal() {
                 },
               ]}
             >
-              <View style={[styles.checkbox, { borderColor: checked ? Accent : colors.secondaryText }]}>
-                {checked && <View style={[styles.checkboxFill, { backgroundColor: Accent }]} />}
+              <View style={[styles.checkbox, { borderColor: checked ? Primary : colors.secondaryText }]}>
+                {checked && <View style={[styles.checkboxFill, { backgroundColor: Primary }]} />}
               </View>
               <Text
                 style={[styles.rowName, { color: checked ? colors.text : colors.secondaryText }]}
@@ -150,7 +150,8 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 52,
-    backgroundColor: Accent,
+    borderRadius: Radius.button,
+    backgroundColor: Primary,
     alignItems: 'center',
     justifyContent: 'center',
   },

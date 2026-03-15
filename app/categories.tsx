@@ -1,16 +1,15 @@
 import { EmptyState } from '@/components/ui/EmptyState';
 import { FAB } from '@/components/ui/FAB';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Fonts, FontSizes, Spacing } from '@/constants/theme';
+import { CardShadow, Fonts, FontSizes, Radius, Spacing } from '@/constants/theme';
 import { useCategoryStore } from '@/stores/useCategoryStore';
 import type { Category } from '@/db/types';
 import { FlashList } from '@shopify/flash-list';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-function CategoryRow({ item, isLast }: { item: Category; isLast: boolean }) {
+function CategoryRow({ item, isLast: _isLast }: { item: Category; isLast: boolean }) {
   const colors = useThemeColors();
   const router = useRouter();
 
@@ -19,10 +18,8 @@ function CategoryRow({ item, isLast }: { item: Category; isLast: boolean }) {
       onPress={() => router.push({ pathname: '/category/[id]', params: { id: String(item.id) } })}
       style={({ pressed }) => [
         styles.row,
-        {
-          opacity: pressed ? 0.6 : 1,
-          borderBottomColor: isLast ? 'transparent' : colors.separator,
-        },
+        { backgroundColor: colors.surface, opacity: pressed ? 0.6 : 1 },
+        CardShadow,
       ]}
       accessibilityRole="button"
     >
@@ -37,7 +34,6 @@ function CategoryRow({ item, isLast }: { item: Category; isLast: boolean }) {
 export default function CategoriesScreen() {
   const colors = useThemeColors();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const { categories, load } = useCategoryStore();
 
   useFocusEffect(
@@ -47,7 +43,7 @@ export default function CategoriesScreen() {
   );
 
   return (
-    <View style={[styles.screen, { backgroundColor: colors.background, paddingTop: insets.top }]}>
+    <View style={[styles.screen, { backgroundColor: colors.background }]}>
       {categories.length === 0 ? (
         <EmptyState message="Добавьте первую категорию" icon="🏷️" />
       ) : (
@@ -67,14 +63,16 @@ export default function CategoriesScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1 },
-  list: { paddingBottom: 96 },
+  list: { paddingBottom: 96, paddingTop: Spacing.sm },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginHorizontal: Spacing.lg,
+    marginVertical: 4,
+    borderRadius: Radius.card,
     minHeight: 56,
   },
   rowName: {

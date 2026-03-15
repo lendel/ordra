@@ -2,7 +2,7 @@ import { PriceLabel } from '@/components/ui/PriceLabel';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { FAB } from '@/components/ui/FAB';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Accent, Fonts, FontSizes, Spacing } from '@/constants/theme';
+import { CardShadow, Fonts, FontSizes, Primary, Radius, Spacing } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import type { Product } from '@/db/types';
 import { categoryService } from '@/services/categoryService';
@@ -14,7 +14,7 @@ import { useCallback, useLayoutEffect, useState } from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-function ProductRow({ item, isLast }: { item: Product; isLast: boolean }) {
+function ProductRow({ item, isLast: _isLast }: { item: Product; isLast: boolean }) {
   const colors = useThemeColors();
   const router = useRouter();
 
@@ -23,10 +23,8 @@ function ProductRow({ item, isLast }: { item: Product; isLast: boolean }) {
       onPress={() => router.push(`/product/${item.id}`)}
       style={({ pressed }) => [
         styles.row,
-        {
-          opacity: pressed ? 0.6 : 1,
-          borderBottomColor: isLast ? 'transparent' : colors.separator,
-        },
+        { backgroundColor: colors.surface, opacity: pressed ? 0.6 : 1 },
+        CardShadow,
       ]}
     >
       <Text style={[styles.rowName, { color: colors.text }]} numberOfLines={1}>
@@ -101,7 +99,7 @@ export default function CategoryDetailScreen() {
               accessibilityRole="button"
               accessibilityLabel="Экспортировать категорию в PDF"
             >
-              <Ionicons name="share-outline" size={22} color={Accent} />
+              <Ionicons name="share-outline" size={22} color={Primary} />
             </Pressable>
           )}
           <Pressable
@@ -128,7 +126,7 @@ export default function CategoryDetailScreen() {
           renderItem={({ item, index }) => (
             <ProductRow item={item} isLast={index === products.length - 1} />
           )}
-          contentContainerStyle={{ paddingBottom: 96 }}
+          contentContainerStyle={{ paddingBottom: 96, paddingTop: Spacing.sm }}
         />
       )}
 
@@ -153,7 +151,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginHorizontal: Spacing.lg,
+    marginVertical: 4,
+    borderRadius: Radius.card,
     minHeight: 56,
   },
   rowName: {

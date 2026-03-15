@@ -1,7 +1,7 @@
 import { EmptyState } from '@/components/ui/EmptyState';
 import { FlatInput } from '@/components/ui/FlatInput';
 import { PriceLabel } from '@/components/ui/PriceLabel';
-import { Accent, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
+import { Primary, Fonts, FontSizes, Radius, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import type { Product } from '@/db/types';
 import { useCatalogStore } from '@/stores/useCatalogStore';
@@ -114,7 +114,7 @@ function CatalogTab({
       >
         <View style={[styles.confirmBox, { backgroundColor: colors.background }]}>
           <Pressable onPress={() => setSelected(null)} style={styles.backBtn}>
-            <Text style={[styles.backBtnText, { color: Accent }]}>← Назад</Text>
+            <Text style={[styles.backBtnText, { color: Primary }]}>← Назад</Text>
           </Pressable>
 
           <Text style={[styles.confirmName, { color: colors.text }]}>{selected.name}</Text>
@@ -126,7 +126,7 @@ function CatalogTab({
                 styles.priceInput,
                 {
                   color: colors.text,
-                  borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Accent : colors.separator,
+                  borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
                 },
               ]}
               placeholder="₸ 0"
@@ -166,7 +166,7 @@ function CatalogTab({
             styles.search,
             {
               color: colors.text,
-              borderBottomColor: query ? Accent : colors.separator,
+              borderBottomColor: query ? Primary : colors.separator,
             },
           ]}
           placeholder="Поиск товара…"
@@ -289,7 +289,7 @@ function NewProductTab({
               styles.priceInput,
               {
                 color: colors.text,
-                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Accent : colors.separator,
+                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
               },
             ]}
             placeholder="₸ 0"
@@ -346,13 +346,13 @@ export default function AddRequestItemModal() {
             onPress={() => setActiveTab(tab)}
             style={[
               styles.tab,
-              activeTab === tab && { borderBottomColor: Accent },
+              activeTab === tab && { borderBottomColor: Primary },
             ]}
           >
             <Text
               style={[
                 styles.tabText,
-                { color: activeTab === tab ? Accent : colors.secondaryText },
+                { color: activeTab === tab ? Primary : colors.secondaryText },
               ]}
             >
               {tab === 'catalog' ? 'Из каталога' : 'Новый товар'}
@@ -483,7 +483,8 @@ const styles = StyleSheet.create({
   // Кнопка
   btn: {
     height: 52,
-    backgroundColor: Accent,
+    borderRadius: Radius.button,
+    backgroundColor: Primary,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 'auto',

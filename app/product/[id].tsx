@@ -1,7 +1,7 @@
 import { PriceLabel } from '@/components/ui/PriceLabel';
 import { CategoryPickerModal } from '@/components/ui/CategoryPickerModal';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Accent, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
+import { CardShadow, Fonts, FontSizes, Primary, Radius, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import type { PriceHistory, ProductWithCategory } from '@/db/types';
 import { productService } from '@/services/productService';
 import { useCategoryStore } from '@/stores/useCategoryStore';
@@ -49,7 +49,13 @@ function PriceHistoryRow({ item, prev }: { item: PriceHistory; prev: PriceHistor
     delta === null ? null : `${delta > 0 ? '+' : ''}${delta.toLocaleString('ru-RU')} ₸`;
 
   return (
-    <View style={[styles.histRow, { borderBottomColor: colors.separator }]}>
+    <View
+      style={[
+        styles.histRow,
+        { backgroundColor: colors.surface },
+        CardShadow,
+      ]}
+    >
       <Text style={[styles.histDate, { color: colors.secondaryText }]}>{date}</Text>
       <View style={styles.histRight}>
         {deltaText ? <Text style={[styles.delta, { color: deltaColor }]}>{deltaText}</Text> : null}
@@ -152,7 +158,13 @@ export default function ProductScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       {/* Текущая цена */}
-      <View style={[styles.infoSection, { borderBottomColor: colors.separator }]}>
+      <View
+        style={[
+          styles.infoSection,
+          { backgroundColor: colors.surface, margin: Spacing.lg },
+          CardShadow,
+        ]}
+      >
         <View style={styles.infoRow}>
           <Text style={[styles.infoLabel, { color: colors.secondaryText }]}>ТЕКУЩАЯ ЦЕНА</Text>
           <View style={styles.priceSectionRow}>
@@ -194,6 +206,7 @@ export default function ProductScreen() {
           <PriceHistoryRow item={item} prev={history[index + 1]} />
         )}
         style={styles.list}
+        contentContainerStyle={styles.histList}
         ListEmptyComponent={
           <View style={styles.listEmpty}>
             <Text style={[styles.emptyHist, { color: colors.secondaryText }]}>
@@ -214,7 +227,7 @@ export default function ProductScreen() {
               styles.priceInput,
               {
                 color: colors.text,
-                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Accent : colors.separator,
+                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
               },
             ]}
             placeholder="₸ 0"
@@ -262,7 +275,7 @@ const styles = StyleSheet.create({
 
   // Инфо-секция (цена + категория)
   infoSection: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderRadius: Radius.card,
   },
   infoRow: {
     paddingHorizontal: Spacing.lg,
@@ -310,6 +323,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   list: { flex: 1 },
+  histList: { paddingTop: Spacing.sm, paddingBottom: Spacing.md },
   listEmpty: { flex: 1, justifyContent: 'center' },
   histRow: {
     flexDirection: 'row',
@@ -317,7 +331,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.sm,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginHorizontal: Spacing.lg,
+    marginVertical: 4,
+    borderRadius: Radius.card,
   },
   histDate: {
     fontFamily: Fonts.regular,
@@ -363,9 +379,10 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 52,
-    backgroundColor: Accent,
+    backgroundColor: Primary,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: Radius.button,
   },
   btnText: {
     fontFamily: Fonts.bold,

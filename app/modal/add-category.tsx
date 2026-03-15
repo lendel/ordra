@@ -1,6 +1,6 @@
 import { FlatInput } from '@/components/ui/FlatInput';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Accent, Fonts, FontSizes, Spacing } from '@/constants/theme';
+import { Primary, Fonts, FontSizes, Radius, Spacing } from '@/constants/theme';
 import { useCategoryStore } from '@/stores/useCategoryStore';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 52,
-    backgroundColor: Accent,
+    borderRadius: Radius.button,
+    backgroundColor: Primary,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 'auto',

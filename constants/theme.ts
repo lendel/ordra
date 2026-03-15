@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 export const Fonts = {
   regular: 'Inter-Regular',
   medium: 'Inter-Medium',
@@ -18,8 +20,9 @@ export const FontSizes = {
 export const Radius = {
   sm: 8,
   md: 12,
-  lg: 16,
+  card: 16,
   xl: 20,
+  button: 24,
 };
 
 export const Spacing = {
@@ -31,9 +34,23 @@ export const Spacing = {
   xxl: 32,
 };
 
-export const Accent = '#007AFF';
+/** Deep Pine Green — кнопки, активные элементы, заголовки */
+export const Primary = '#004D40';
 
-/** Цвет цен — используй colors.priceText в компонентах (адаптивный light/dark) */
+/** Vivid Orange — FAB, прогресс-бары, статус "в работе" */
+export const Accent = '#FF9800';
+
+/** Тень для карточек */
+export const CardShadow = Platform.select({
+  ios: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.07,
+    shadowRadius: 8,
+  },
+  android: { elevation: 2 },
+}) ?? { elevation: 2 };
+
 export const SECTION_HEADER_STYLE = {
   fontSize: 11,
   letterSpacing: 0.8,

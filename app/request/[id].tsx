@@ -1,10 +1,10 @@
 import { PriceLabel } from '@/components/ui/PriceLabel';
 import { FAB } from '@/components/ui/FAB';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { Accent, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
+import { CardShadow, Fonts, FontSizes, Primary, Radius, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import { Ionicons } from '@expo/vector-icons';
-import { STATUS_COLORS, STATUS_LABELS } from '@/db/types';
+import { STATUS_BG_COLORS, STATUS_COLORS, STATUS_LABELS } from '@/db/types';
 import type { Request, RequestItem } from '@/db/types';
 import { requestService } from '@/services/requestService';
 import { useRequestStore } from '@/stores/useRequestStore';
@@ -53,7 +53,7 @@ const tengeMask = createNumberMask({
 
 function ItemRow({
   item,
-  isLast,
+  isLast: _isLast,
   canDelete,
   isReceivable,
   onDelete,
@@ -97,15 +97,16 @@ function ItemRow({
   const isReceived = item.received === 1;
 
   return (
-    <View style={{ overflow: 'hidden' }}>
+    <View
+      style={[
+        styles.itemCard,
+        { backgroundColor: colors.surface },
+        CardShadow,
+      ]}
+    >
       {/* Фон — зелёная подложка при свайпе */}
       {isReceivable && !isReceived && (
-        <View
-          style={[
-            styles.swipeBg,
-            { borderBottomColor: isLast ? 'transparent' : colors.separator },
-          ]}
-        >
+        <View style={styles.swipeBg}>
           <Text style={styles.swipeBgText}>Получен ✓</Text>
         </View>
       )}
@@ -115,8 +116,7 @@ function ItemRow({
         style={[
           styles.itemRow,
           {
-            backgroundColor: colors.background,
-            borderBottomColor: isLast ? 'transparent' : colors.separator,
+            backgroundColor: colors.surface,
             transform: [{ translateX }],
           },
         ]}
@@ -238,7 +238,7 @@ function ReceiveModal({
                   borderBottomColor: priceError
                     ? '#FF3B30'
                     : maskedPrice
-                    ? Accent
+                    ? Primary
                     : colors.separator,
                 },
               ]}
@@ -396,7 +396,7 @@ export default function RequestDetailScreen() {
               accessibilityRole="button"
               accessibilityLabel="Поделиться заявкой"
             >
-              <Ionicons name="share-outline" size={22} color={Accent} />
+              <Ionicons name="share-outline" size={22} color={Primary} />
             </Pressable>
           )}
           {isDraft && (
@@ -416,14 +416,24 @@ export default function RequestDetailScreen() {
               accessibilityRole="button"
               accessibilityLabel="Отправить заявку"
             >
-              <View style={[styles.badge, { borderColor: STATUS_COLORS[request.status] }]}>
+              <View
+                style={[
+                  styles.badge,
+                  { backgroundColor: STATUS_BG_COLORS[request.status] },
+                ]}
+              >
                 <Text style={[styles.badgeText, { color: STATUS_COLORS[request.status] }]}>
                   {STATUS_LABELS[request.status]}
                 </Text>
               </View>
             </Pressable>
           ) : (
-            <View style={[styles.badge, { borderColor: STATUS_COLORS[request.status] }]}>
+            <View
+              style={[
+                styles.badge,
+                { backgroundColor: STATUS_BG_COLORS[request.status] },
+              ]}
+            >
               <Text style={[styles.badgeText, { color: STATUS_COLORS[request.status] }]}>
                 {STATUS_LABELS[request.status]}
               </Text>
@@ -490,7 +500,7 @@ export default function RequestDetailScreen() {
                 onReceive={() => setReceiveItem(item)}
               />
             )}
-            contentContainerStyle={{ paddingBottom: isEditable ? 120 : 96 }}
+            contentContainerStyle={{ paddingBottom: isEditable ? 120 : 96, paddingTop: Spacing.sm }}
           />
         </>
       )}
@@ -559,8 +569,7 @@ const styles = StyleSheet.create({
   badge: {
     paddingHorizontal: Spacing.sm,
     paddingVertical: 3,
-    borderRadius: 4,
-    borderWidth: 1,
+    borderRadius: Radius.sm,
   },
   badgeText: {
     fontFamily: Fonts.semiBold,
@@ -576,7 +585,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
 
-  // Строка позиции
+  // Карточка позиции
+  itemCard: {
+    marginHorizontal: Spacing.lg,
+    marginVertical: 4,
+    borderRadius: Radius.card,
+    overflow: 'hidden',
+  },
+  // Фон свайпа
   swipeBg: {
     position: 'absolute',
     top: 0,
@@ -586,7 +602,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#34C759',
     justifyContent: 'center',
     paddingLeft: Spacing.lg,
-    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   swipeBgText: {
     fontFamily: Fonts.semiBold,
@@ -599,7 +614,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
-    borderBottomWidth: StyleSheet.hairlineWidth,
     minHeight: 56,
   },
   itemName: {
@@ -673,9 +687,10 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 52,
-    backgroundColor: Accent,
+    backgroundColor: Primary,
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: Radius.button,
   },
   btnPressed: { opacity: 0.85 },
   btnText: {

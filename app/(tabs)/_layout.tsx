@@ -1,11 +1,12 @@
 import Colors from '@/constants/Colors';
+import { Fonts } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { Platform, useColorScheme } from 'react-native';
 
 const TAB_BG: Record<'light' | 'dark', string> = {
-  light: '#FFFFFF',
-  dark: '#1C1C1E',
+  light: 'rgba(255,255,255,0.94)',
+  dark: 'rgba(28,28,30,0.94)',
 };
 
 export default function TabLayout() {
@@ -17,17 +18,20 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
+        tabBarLabelStyle: {
+          fontFamily: Fonts.medium,
+          fontSize: 11,
+        },
         tabBarStyle: {
           backgroundColor: bg,
           borderTopWidth: 0,
-          // На Android даём лёгкую тень чтобы таб-бар не сливался с контентом
           ...Platform.select({
-            android: { elevation: 8 },
+            android: { elevation: 12 },
             ios: {
               shadowColor: '#000',
-              shadowOpacity: 0.08,
+              shadowOpacity: 0.1,
               shadowOffset: { width: 0, height: -1 },
-              shadowRadius: 4,
+              shadowRadius: 8,
             },
           }),
         },

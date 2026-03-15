@@ -1,9 +1,9 @@
 import { EmptyState } from '@/components/ui/EmptyState';
 import { FAB } from '@/components/ui/FAB';
 import { PriceLabel } from '@/components/ui/PriceLabel';
-import { Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
+import { CardShadow, Fonts, FontSizes, Radius, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { STATUS_COLORS, STATUS_LABELS } from '@/db/types';
+import { STATUS_BG_COLORS, STATUS_COLORS, STATUS_LABELS } from '@/db/types';
 import type { RequestWithStats } from '@/db/types';
 import { useRequestStore } from '@/stores/useRequestStore';
 import { FlashList } from '@shopify/flash-list';
@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // ─── Строка заявки ────────────────────────────────────────────────────────────
 
-function RequestRow({ item, isLast }: { item: RequestWithStats; isLast: boolean }) {
+function RequestRow({ item, isLast: _isLast }: { item: RequestWithStats; isLast: boolean }) {
   const colors = useThemeColors();
   const router = useRouter();
 
@@ -23,10 +23,8 @@ function RequestRow({ item, isLast }: { item: RequestWithStats; isLast: boolean 
       onPress={() => router.push(`/request/${item.id}`)}
       style={({ pressed }) => [
         styles.row,
-        {
-          opacity: pressed ? 0.6 : 1,
-          borderBottomColor: isLast ? 'transparent' : colors.separator,
-        },
+        { backgroundColor: colors.surface, opacity: pressed ? 0.6 : 1 },
+        CardShadow,
       ]}
       accessibilityRole="button"
       accessibilityLabel={`Заявка ${item.title}`}
@@ -35,7 +33,12 @@ function RequestRow({ item, isLast }: { item: RequestWithStats; isLast: boolean 
         <Text style={[styles.rowTitle, { color: colors.text }]} numberOfLines={1}>
           {item.title}
         </Text>
-        <View style={[styles.badge, { borderColor: STATUS_COLORS[item.status] }]}>
+        <View
+          style={[
+            styles.badge,
+            { backgroundColor: STATUS_BG_COLORS[item.status] },
+          ]}
+        >
           <Text style={[styles.badgeText, { color: STATUS_COLORS[item.status] }]}>
             {STATUS_LABELS[item.status]}
           </Text>
@@ -95,7 +98,7 @@ export default function RequestsScreen() {
           renderItem={({ item, index }) => (
             <RequestRow item={item} isLast={index === requests.length - 1} />
           )}
-          contentContainerStyle={{ paddingBottom: 96 }}
+          contentContainerStyle={{ paddingBottom: 96, paddingTop: Spacing.sm }}
         />
       )}
 
@@ -132,7 +135,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
     gap: Spacing.xs,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginHorizontal: Spacing.lg,
+    marginVertical: 4,
+    borderRadius: Radius.card,
     minHeight: 72,
     justifyContent: 'center',
   },
@@ -160,8 +165,7 @@ const styles = StyleSheet.create({
   badge: {
     paddingHorizontal: Spacing.sm,
     paddingVertical: 2,
-    borderRadius: 4,
-    borderWidth: 1,
+    borderRadius: Radius.sm,
   },
   badgeText: {
     fontFamily: Fonts.semiBold,

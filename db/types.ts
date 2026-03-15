@@ -14,8 +14,15 @@ export const STATUS_LABELS: Record<RequestStatus, string> = {
 export const STATUS_COLORS: Record<RequestStatus, string> = {
   draft: '#8E8E93',
   sent: '#007AFF',
-  completed: '#34C759',
+  completed: '#2E7D32',
   cancelled: '#FF3B30',
+};
+
+export const STATUS_BG_COLORS: Record<RequestStatus, string> = {
+  draft: 'rgba(142,142,147,0.15)',
+  sent: 'rgba(0,122,255,0.12)',
+  completed: 'rgba(46,125,50,0.12)',
+  cancelled: 'rgba(255,59,48,0.12)',
 };
 
 export const REQUEST_STATUSES: RequestStatus[] = ['draft', 'sent', 'completed', 'cancelled'];

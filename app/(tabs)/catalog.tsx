@@ -2,7 +2,7 @@ import { EmptyState } from '@/components/ui/EmptyState';
 import { FAB } from '@/components/ui/FAB';
 import { PriceLabel } from '@/components/ui/PriceLabel';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Accent, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
+import { CardShadow, Fonts, FontSizes, Primary, Radius, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import { useCatalogStore } from '@/stores/useCatalogStore';
 import type { ProductWithCategory } from '@/db/types';
 import { exportCatalogPdf } from '@/utils/exportPdf';
@@ -16,7 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // ─── Строка товара ────────────────────────────────────────────────────────────
 
-function ProductRow({ item, isLast }: { item: ProductWithCategory; isLast: boolean }) {
+function ProductRow({ item, isLast: _isLast }: { item: ProductWithCategory; isLast: boolean }) {
   const colors = useThemeColors();
   const router = useRouter();
 
@@ -25,10 +25,8 @@ function ProductRow({ item, isLast }: { item: ProductWithCategory; isLast: boole
       onPress={() => router.push(`/product/${item.id}`)}
       style={({ pressed }) => [
         styles.row,
-        {
-          opacity: pressed ? 0.6 : 1,
-          borderBottomColor: isLast ? 'transparent' : colors.separator,
-        },
+        { backgroundColor: colors.surface, opacity: pressed ? 0.6 : 1 },
+        CardShadow,
       ]}
       accessibilityRole="button"
       accessibilityLabel={`Товар ${item.name}`}
@@ -111,7 +109,7 @@ export default function CatalogScreen() {
         style={[
           styles.searchWrap,
           {
-            paddingTop: insets.top + Spacing.lg,
+            paddingTop: insets.top + Spacing.xl,
             borderBottomColor: colors.separator,
           },
         ]}
@@ -122,7 +120,7 @@ export default function CatalogScreen() {
               styles.search,
               {
                 color: colors.text,
-                borderBottomColor: query ? Accent : colors.separator,
+                borderBottomColor: query ? Primary : colors.separator,
               },
             ]}
             placeholder="Поиск товара…"
@@ -140,7 +138,7 @@ export default function CatalogScreen() {
             accessibilityLabel="Категории"
             accessibilityRole="button"
           >
-            <Ionicons name="pricetags-outline" size={20} color={Accent} />
+            <Ionicons name="pricetags-outline" size={20} color={Primary} />
           </Pressable>
           {products.length > 0 && (
             <Pressable
@@ -150,7 +148,7 @@ export default function CatalogScreen() {
               accessibilityLabel="Экспортировать каталог в PDF"
               accessibilityRole="button"
             >
-              <Ionicons name="share-outline" size={20} color={Accent} />
+              <Ionicons name="share-outline" size={20} color={Primary} />
             </Pressable>
           )}
         </View>
@@ -215,6 +213,7 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingBottom: 96,
+    paddingTop: Spacing.sm,
   },
 
   row: {
@@ -223,7 +222,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: Spacing.lg,
     paddingVertical: Spacing.md,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginHorizontal: Spacing.lg,
+    marginVertical: 4,
+    borderRadius: Radius.card,
     minHeight: 56,
   },
   rowLeft: {

@@ -1,5 +1,5 @@
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Accent, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
+import { Primary, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from '@/constants/theme';
 import type { Category } from '@/db/types';
 import { Modal, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -46,11 +46,11 @@ export function CategoryPickerModal({ visible, categories, selectedId, onSelect,
               { borderBottomColor: colors.separator, opacity: pressed ? 0.6 : 1 },
             ]}
           >
-            <Text style={[styles.optionText, { color: selectedId === null ? Accent : colors.text }]}>
+            <Text style={[styles.optionText, { color: selectedId === null ? Primary : colors.text }]}>
               Без категории
             </Text>
             {selectedId === null && (
-              <Text style={[styles.check, { color: Accent }]}>✓</Text>
+              <Text style={[styles.check, { color: Primary }]}>✓</Text>
             )}
           </Pressable>
 
@@ -66,14 +66,14 @@ export function CategoryPickerModal({ visible, categories, selectedId, onSelect,
               <Text
                 style={[
                   styles.optionText,
-                  { color: selectedId === cat.id ? Accent : colors.text },
+                  { color: selectedId === cat.id ? Primary : colors.text },
                 ]}
                 numberOfLines={1}
               >
                 {cat.name}
               </Text>
               {selectedId === cat.id && (
-                <Text style={[styles.check, { color: Accent }]}>✓</Text>
+                <Text style={[styles.check, { color: Primary }]}>✓</Text>
               )}
             </Pressable>
           ))}

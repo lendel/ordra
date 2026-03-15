@@ -1,4 +1,4 @@
-import { Accent, Fonts, FontSizes, Spacing } from '@/constants/theme';
+import { Primary, Fonts, FontSizes, Spacing } from '@/constants/theme';
 import { useThemeColors } from '@/hooks/useThemeColors';
 import { StyleSheet, Text, TextInput, type TextInputProps, View } from 'react-native';
 
@@ -19,7 +19,7 @@ export function FlatInput({ label, error, style, ...props }: FlatInputProps) {
           styles.input,
           {
             color: colors.text,
-            borderBottomColor: hasError ? '#FF3B30' : props.value ? Accent : colors.separator,
+            borderBottomColor: hasError ? '#FF3B30' : props.value ? Primary : colors.separator,
           },
           style,
         ]}

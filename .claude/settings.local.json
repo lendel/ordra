@@ -23,7 +23,19 @@
       "Bash(find C:/Users/lende/.claude/plugins/cache/claude-plugins-official/frontend-design/2cd88e7947b7 -name *.json)",
       "Bash(node -e \"const p = require\\(''./node_modules/react-native-view-shot/package.json''\\); console.log\\(p.version, p.peerDependencies?.[''react-native'']\\)\")",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(grep -ri zayavka --include=*.ts --include=*.tsx --include=*.json -l)",
+      "Bash(sed -i \"s/import { Accent, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from ''@\\\\/constants\\\\/theme'';/import { Primary, Fonts, FontSizes, SECTION_HEADER_STYLE, Spacing } from ''@\\\\/constants\\\\/theme'';/\" \"E:/Projects/Zayavka/components/ui/CategoryPickerModal.tsx\")",
+      "Bash(sed -i 's/selectedId === null ? Accent/selectedId === null ? Primary/g; s/selectedId === cat.id ? Accent/selectedId === cat.id ? Primary/g; s/{ color: Accent }/{ color: Primary }/g' \"E:/Projects/Zayavka/components/ui/CategoryPickerModal.tsx\")",
+      "Bash(ls \"E:/Projects/Zayavka/app/\\(tabs\\)/\")",
+      "Bash(node -e \":*)",
+      "Bash(sed -i \"s/import { Accent, Fonts, FontSizes, Spacing } from ''@\\\\/constants\\\\/theme'';/import { Primary, Fonts, FontSizes, Radius, Spacing } from ''@\\\\/constants\\\\/theme'';/\" \"app/modal/add-category.tsx\")",
+      "Bash(sed -i \"s/backgroundColor: Accent/backgroundColor: Primary/g\" \"app/modal/add-category.tsx\")",
+      "Bash(sed -i \"s/height: 52,/height: 52,\\\\n    borderRadius: Radius.button,/\" \"app/modal/add-category.tsx\")",
+      "Bash(sed -i 's/\"\"name\"\": \"\"zayavka\"\"/\"\"name\"\": \"\"ordra\"\"/' package.json)",
+      "Bash(grep '\"\"name\"\"' package.json)",
+      "Bash(node:*)"
     ]
   }
 }

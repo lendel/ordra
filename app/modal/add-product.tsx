@@ -1,7 +1,7 @@
 import { FlatInput } from '@/components/ui/FlatInput';
 import { CategoryPickerModal } from '@/components/ui/CategoryPickerModal';
 import { useThemeColors } from '@/hooks/useThemeColors';
-import { Accent, Fonts, FontSizes, Spacing } from '@/constants/theme';
+import { Primary, Fonts, FontSizes, Radius, Spacing } from '@/constants/theme';
 import { useCatalogStore } from '@/stores/useCatalogStore';
 import { useCategoryStore } from '@/stores/useCategoryStore';
 import { Ionicons } from '@expo/vector-icons';
@@ -99,7 +99,7 @@ export default function AddProductModal() {
               styles.priceInput,
               {
                 color: colors.text,
-                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Accent : colors.separator,
+                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
               },
             ]}
             placeholder="₸ 0"
@@ -128,7 +128,7 @@ export default function AddProductModal() {
             style={({ pressed }) => [
               styles.categoryBtn,
               {
-                borderBottomColor: selectedCategory ? Accent : colors.separator,
+                borderBottomColor: selectedCategory ? Primary : colors.separator,
                 opacity: pressed ? 0.6 : 1,
               },
             ]}
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 52,
-    backgroundColor: Accent,
+    backgroundColor: Primary,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 'auto',
