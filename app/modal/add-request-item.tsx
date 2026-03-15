@@ -126,7 +126,7 @@ function CatalogTab({
                 styles.priceInput,
                 {
                   color: colors.text,
-                  borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
+                  borderBottomColor: priceError ? '#8B2020' : maskedPrice ? Primary : colors.separator,
                 },
               ]}
               placeholder="₸ 0"
@@ -161,23 +161,19 @@ function CatalogTab({
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       {/* Поиск */}
       <View style={[styles.searchWrap, { borderBottomColor: colors.separator }]}>
-        <TextInput
-          style={[
-            styles.search,
-            {
-              color: colors.text,
-              borderBottomColor: query ? Primary : colors.separator,
-            },
-          ]}
-          placeholder="Поиск товара…"
-          placeholderTextColor={colors.secondaryText}
-          value={query}
-          onChangeText={setQuery}
-          clearButtonMode="while-editing"
-          returnKeyType="search"
-          autoCorrect={false}
-          autoCapitalize="none"
-        />
+        <View style={[styles.searchPill, { backgroundColor: colors.surface, borderColor: query ? Primary : colors.separator }]}>
+          <TextInput
+            style={[styles.search, { color: colors.text }]}
+            placeholder="Поиск товара…"
+            placeholderTextColor={colors.secondaryText}
+            value={query}
+            onChangeText={setQuery}
+            clearButtonMode="while-editing"
+            returnKeyType="search"
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
+        </View>
       </View>
 
       {/* Количество */}
@@ -289,7 +285,7 @@ function NewProductTab({
               styles.priceInput,
               {
                 color: colors.text,
-                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
+                borderBottomColor: priceError ? '#8B2020' : maskedPrice ? Primary : colors.separator,
               },
             ]}
             placeholder="₸ 0"
@@ -398,11 +394,18 @@ const styles = StyleSheet.create({
     paddingTop: Spacing.md,
     paddingBottom: Spacing.sm,
   },
+  searchPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 44,
+    borderRadius: 100,
+    borderWidth: 1,
+    paddingHorizontal: Spacing.md,
+  },
   search: {
+    flex: 1,
     fontFamily: Fonts.regular,
     fontSize: FontSizes.md,
-    borderBottomWidth: 1,
-    paddingVertical: Spacing.sm,
   },
 
   // Счётчик
@@ -477,7 +480,7 @@ const styles = StyleSheet.create({
   fieldError: {
     fontFamily: Fonts.regular,
     fontSize: FontSizes.sm,
-    color: '#FF3B30',
+    color: '#8B2020',
   },
 
   // Кнопка

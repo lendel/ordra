@@ -44,7 +44,7 @@ function PriceHistoryRow({ item, prev }: { item: PriceHistory; prev: PriceHistor
   });
 
   const delta = prev !== undefined ? item.price - prev.price : null;
-  const deltaColor = delta === null ? undefined : delta > 0 ? '#ef4444' : '#22c55e';
+  const deltaColor = delta === null ? undefined : delta > 0 ? '#8B2020' : '#3B5C1E';
   const deltaText =
     delta === null ? null : `${delta > 0 ? '+' : ''}${delta.toLocaleString('ru-RU')} ₸`;
 
@@ -227,7 +227,7 @@ export default function ProductScreen() {
               styles.priceInput,
               {
                 color: colors.text,
-                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
+                borderBottomColor: priceError ? '#8B2020' : maskedPrice ? Primary : colors.separator,
               },
             ]}
             placeholder="₸ 0"
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
   error: {
     fontFamily: Fonts.regular,
     fontSize: FontSizes.sm,
-    color: '#FF3B30',
+    color: '#8B2020',
   },
   btn: {
     height: 52,

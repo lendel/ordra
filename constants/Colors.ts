@@ -1,29 +1,29 @@
-const primary = '#004D40';
-const accent = '#FF9800';
+const primary = '#2D1B0E';
+const accent = '#C8956C';
 
 export default {
   light: {
-    text: '#1C1C1E',
-    background: '#F5F5F7',
-    surface: '#FFFFFF',
+    text: '#2D1B0E',
+    background: '#F2E0C8',
+    surface: '#FBF3E8',
     tint: primary,
-    tabIconDefault: '#8E8E93',
-    tabIconSelected: primary,
-    separator: 'rgba(0,0,0,0.08)',
-    secondaryText: '#8E8E93',
-    priceText: '#2E7D32',
+    tabIconDefault: '#A08060',
+    tabIconSelected: '#FBF3E8',
+    separator: 'rgba(45,27,14,0.1)',
+    secondaryText: '#8B6355',
+    priceText: '#5C3D1E',
     accent,
   },
   dark: {
-    text: '#FFFFFF',
-    background: '#121212',
-    surface: '#1C1C1E',
-    tint: '#00897B',
-    tabIconDefault: '#636366',
-    tabIconSelected: '#00897B',
-    separator: 'rgba(255,255,255,0.1)',
-    secondaryText: '#8E8E93',
-    priceText: '#4CAF50',
-    accent: '#FF9800',
+    text: '#F2E0C8',
+    background: '#1A0F07',
+    surface: '#2A1A0E',
+    tint: '#C8956C',
+    tabIconDefault: '#7A5C44',
+    tabIconSelected: '#F2E0C8',
+    separator: 'rgba(242,224,200,0.1)',
+    secondaryText: '#A08060',
+    priceText: '#C8956C',
+    accent: '#C8956C',
   },
 };

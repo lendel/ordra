@@ -108,7 +108,7 @@ export default function CategoryDetailScreen() {
             accessibilityRole="button"
             accessibilityLabel="Удалить категорию"
           >
-            <Ionicons name="trash-outline" size={20} color="#FF3B30" />
+            <Ionicons name="trash-outline" size={20} color="#8B2020" />
           </Pressable>
         </View>
       ),

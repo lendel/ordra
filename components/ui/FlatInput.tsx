@@ -19,7 +19,7 @@ export function FlatInput({ label, error, style, ...props }: FlatInputProps) {
           styles.input,
           {
             color: colors.text,
-            borderBottomColor: hasError ? '#FF3B30' : props.value ? Primary : colors.separator,
+            borderBottomColor: hasError ? '#8B2020' : props.value ? Primary : colors.separator,
           },
           style,
         ]}
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
   error: {
     fontFamily: Fonts.regular,
     fontSize: FontSizes.sm,
-    color: '#FF3B30',
+    color: '#8B2020',
   },
 });

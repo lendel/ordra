@@ -10,9 +10,9 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function progressBarColor(pct: number): string {
-  if (pct === 0) return '#3A3A3C'; // нейтральный серый
-  if (pct < 100) return '#FF9500'; // оранжевый — в процессе
-  return '#34C759'; // зелёный — выполнено
+  if (pct === 0) return '#A08060'; // нейтральный тёплый
+  if (pct < 100) return '#C8956C'; // карамельный — в процессе
+  return '#3B5C1E'; // тёплый зелёный — выполнено
 }
 
 export default function DashboardScreen() {
@@ -63,7 +63,7 @@ export default function DashboardScreen() {
           {totalRequests > 0 && (
             <View style={styles.metricSub}>
               {completedCount > 0 && (
-                <Text style={[styles.metricSubText, { color: '#34C759' }]}>
+                <Text style={[styles.metricSubText, { color: '#3B5C1E' }]}>
                   {completedCount} вып.
                 </Text>
               )}
@@ -71,7 +71,7 @@ export default function DashboardScreen() {
                 <Text style={[styles.metricSubDot, { color: colors.secondaryText }]}>·</Text>
               )}
               {sentCount > 0 && (
-                <Text style={[styles.metricSubText, { color: '#FF9500' }]}>
+                <Text style={[styles.metricSubText, { color: '#C8956C' }]}>
                   {sentCount} в работе
                 </Text>
               )}

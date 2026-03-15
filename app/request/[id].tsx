@@ -126,7 +126,7 @@ function ItemRow({
           <Ionicons
             name="checkmark-circle"
             size={16}
-            color="#34C759"
+            color="#3B5C1E"
             style={{ marginRight: Spacing.sm }}
           />
         )}
@@ -236,7 +236,7 @@ function ReceiveModal({
                 {
                   color: colors.text,
                   borderBottomColor: priceError
-                    ? '#FF3B30'
+                    ? '#8B2020'
                     : maskedPrice
                     ? Primary
                     : colors.separator,
@@ -406,7 +406,7 @@ export default function RequestDetailScreen() {
               accessibilityRole="button"
               accessibilityLabel="Удалить заявку"
             >
-              <Ionicons name="trash-outline" size={20} color="#FF3B30" />
+              <Ionicons name="trash-outline" size={20} color="#8B2020" />
             </Pressable>
           )}
           {isDraft ? (
@@ -599,7 +599,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: '#34C759',
+    backgroundColor: '#3B5C1E',
     justifyContent: 'center',
     paddingLeft: Spacing.lg,
   },
@@ -629,7 +629,7 @@ const styles = StyleSheet.create({
   },
   deleteIcon: {
     fontSize: 13,
-    color: '#FF3B30',
+    color: '#8B2020',
   },
 
   // Итог
@@ -683,7 +683,7 @@ const styles = StyleSheet.create({
   fieldError: {
     fontFamily: Fonts.regular,
     fontSize: FontSizes.sm,
-    color: '#FF3B30',
+    color: '#8B2020',
   },
   btn: {
     height: 52,

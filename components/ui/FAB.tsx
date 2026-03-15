@@ -33,9 +33,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     ...Platform.select({
       ios: {
-        shadowColor: '#000',
+        shadowColor: '#2D1B0E',
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
+        shadowOpacity: 0.3,
         shadowRadius: 8,
       },
       android: {

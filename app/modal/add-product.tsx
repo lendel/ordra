@@ -99,7 +99,7 @@ export default function AddProductModal() {
               styles.priceInput,
               {
                 color: colors.text,
-                borderBottomColor: priceError ? '#FF3B30' : maskedPrice ? Primary : colors.separator,
+                borderBottomColor: priceError ? '#8B2020' : maskedPrice ? Primary : colors.separator,
               },
             ]}
             placeholder="₸ 0"
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   fieldError: {
     fontFamily: Fonts.regular,
     fontSize: FontSizes.sm,
-    color: '#FF3B30',
+    color: '#8B2020',
   },
   categoryBtn: {
     flexDirection: 'row',
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     height: 52,
+    borderRadius: Radius.button,
     backgroundColor: Primary,
     alignItems: 'center',
     justifyContent: 'center',
