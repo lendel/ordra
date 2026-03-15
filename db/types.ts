@@ -12,17 +12,17 @@ export const STATUS_LABELS: Record<RequestStatus, string> = {
 };
 
 export const STATUS_COLORS: Record<RequestStatus, string> = {
-  draft: '#8E8E93',
-  sent: '#007AFF',
-  completed: '#2E7D32',
-  cancelled: '#FF3B30',
+  draft: '#8B6355',
+  sent: '#5C3D1E',
+  completed: '#3B5C1E',
+  cancelled: '#8B2020',
 };
 
 export const STATUS_BG_COLORS: Record<RequestStatus, string> = {
-  draft: 'rgba(142,142,147,0.15)',
-  sent: 'rgba(0,122,255,0.12)',
-  completed: 'rgba(46,125,50,0.12)',
-  cancelled: 'rgba(255,59,48,0.12)',
+  draft: 'rgba(139,99,85,0.15)',
+  sent: 'rgba(92,61,30,0.12)',
+  completed: 'rgba(59,92,30,0.12)',
+  cancelled: 'rgba(139,32,32,0.12)',
 };
 
 export const REQUEST_STATUSES: RequestStatus[] = ['draft', 'sent', 'completed', 'cancelled'];

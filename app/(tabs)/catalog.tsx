@@ -109,46 +109,35 @@ export default function CatalogScreen() {
         style={[
           styles.searchWrap,
           {
-            paddingTop: insets.top + Spacing.xl,
+            paddingTop: insets.top + Spacing.lg,
             borderBottomColor: colors.separator,
           },
         ]}
       >
         <View style={styles.searchRow}>
-          <TextInput
-            style={[
-              styles.search,
-              {
-                color: colors.text,
-                borderBottomColor: query ? Primary : colors.separator,
-              },
-            ]}
-            placeholder="Поиск товара…"
-            placeholderTextColor={colors.secondaryText}
-            value={query}
-            onChangeText={setQuery}
-            clearButtonMode="while-editing"
-            returnKeyType="search"
-            autoCorrect={false}
-            autoCapitalize="none"
-          />
-          <Pressable
-            onPress={() => router.push('/categories')}
-            style={styles.iconBtn}
-            accessibilityLabel="Категории"
-            accessibilityRole="button"
-          >
-            <Ionicons name="pricetags-outline" size={20} color={Primary} />
-          </Pressable>
+          <View style={[styles.searchPill, { backgroundColor: colors.surface, borderColor: query ? Primary : colors.separator }]}>
+            <Ionicons name="search-outline" size={16} color={colors.secondaryText} style={styles.searchIcon} />
+            <TextInput
+              style={[styles.search, { color: colors.text }]}
+              placeholder="Поиск товара…"
+              placeholderTextColor={colors.secondaryText}
+              value={query}
+              onChangeText={setQuery}
+              clearButtonMode="while-editing"
+              returnKeyType="search"
+              autoCorrect={false}
+              autoCapitalize="none"
+            />
+          </View>
           {products.length > 0 && (
             <Pressable
               onPress={handleExportCatalog}
               disabled={isExporting}
-              style={[styles.iconBtn, { opacity: isExporting ? 0.4 : 1 }]}
+              style={[styles.iconBtn, { backgroundColor: colors.surface, borderColor: colors.separator, opacity: isExporting ? 0.4 : 1 }]}
               accessibilityLabel="Экспортировать каталог в PDF"
               accessibilityRole="button"
             >
-              <Ionicons name="share-outline" size={20} color={Primary} />
+              <Ionicons name="share-outline" size={20} color={colors.tint} />
             </Pressable>
           )}
         </View>
@@ -184,8 +173,8 @@ const styles = StyleSheet.create({
 
   searchWrap: {
     paddingHorizontal: Spacing.lg,
-    paddingBottom: Spacing.sm,
-    gap: Spacing.xs,
+    paddingBottom: Spacing.md,
+    gap: Spacing.sm,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   searchRow: {
@@ -193,17 +182,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.sm,
   },
+  searchPill: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 44,
+    borderRadius: 100,
+    borderWidth: 1,
+    paddingHorizontal: Spacing.md,
+    gap: Spacing.xs,
+  },
+  searchIcon: {
+    marginRight: 2,
+  },
   search: {
     flex: 1,
-    height: 44,
-    borderBottomWidth: 1,
     fontFamily: Fonts.regular,
     fontSize: FontSizes.md,
-    paddingBottom: Spacing.xs,
   },
   iconBtn: {
-    width: 36,
-    height: 36,
+    width: 44,
+    height: 44,
+    borderRadius: 100,
+    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

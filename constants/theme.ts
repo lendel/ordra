@@ -22,7 +22,8 @@ export const Radius = {
   md: 12,
   card: 16,
   xl: 20,
-  button: 24,
+  button: 100, // pill-форма
+  pill: 100,   // поиск, чипы
 };
 
 export const Spacing = {
@@ -34,18 +35,18 @@ export const Spacing = {
   xxl: 32,
 };
 
-/** Deep Pine Green — кнопки, активные элементы, заголовки */
-export const Primary = '#004D40';
+/** Dark Brown — кнопки, активные элементы, таб-бар */
+export const Primary = '#2D1B0E';
 
-/** Vivid Orange — FAB, прогресс-бары, статус "в работе" */
-export const Accent = '#FF9800';
+/** Warm Caramel — FAB, акценты */
+export const Accent = '#C8956C';
 
 /** Тень для карточек */
 export const CardShadow = Platform.select({
   ios: {
-    shadowColor: '#000',
+    shadowColor: '#2D1B0E',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.07,
+    shadowOpacity: 0.08,
     shadowRadius: 8,
   },
   android: { elevation: 2 },

@@ -1,36 +1,36 @@
-import Colors from '@/constants/Colors';
 import { Fonts } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { Platform, useColorScheme } from 'react-native';
+import { Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const TAB_BG: Record<'light' | 'dark', string> = {
-  light: 'rgba(255,255,255,0.94)',
-  dark: 'rgba(28,28,30,0.94)',
-};
+const TAB_BG = '#2D1B0E';
+const TAB_ACTIVE = '#FBF3E8';
+const TAB_INACTIVE = '#A08060';
 
 export default function TabLayout() {
-  const colorScheme = (useColorScheme() ?? 'light') as 'light' | 'dark';
-  const bg = TAB_BG[colorScheme];
+  const insets = useSafeAreaInsets();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-        tabBarInactiveTintColor: Colors[colorScheme].tabIconDefault,
+        tabBarActiveTintColor: TAB_ACTIVE,
+        tabBarInactiveTintColor: TAB_INACTIVE,
         tabBarLabelStyle: {
           fontFamily: Fonts.medium,
           fontSize: 11,
         },
         tabBarStyle: {
-          backgroundColor: bg,
+          backgroundColor: TAB_BG,
           borderTopWidth: 0,
+          paddingBottom: insets.bottom,
+          height: 56 + insets.bottom,
           ...Platform.select({
             android: { elevation: 12 },
             ios: {
-              shadowColor: '#000',
-              shadowOpacity: 0.1,
-              shadowOffset: { width: 0, height: -1 },
+              shadowColor: '#2D1B0E',
+              shadowOpacity: 0.2,
+              shadowOffset: { width: 0, height: -2 },
               shadowRadius: 8,
             },
           }),
@@ -48,6 +48,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="requests"
+        options={{
+          title: 'Заявки',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="document-text-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="catalog"
         options={{
           title: 'Каталог',
@@ -57,11 +66,20 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="requests"
+        name="categories"
         options={{
-          title: 'Заявки',
+          title: 'Категории',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="document-text-outline" size={size} color={color} />
+            <Ionicons name="pricetags-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: 'Настройки',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="settings-outline" size={size} color={color} />
           ),
         }}
       />
