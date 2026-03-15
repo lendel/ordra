@@ -135,7 +135,7 @@ export default function CatalogScreen() {
             accessibilityLabel="Категории"
             accessibilityRole="button"
           >
-            <Ionicons name="pricetags-outline" size={20} color={Primary} />
+            <Ionicons name="pricetags-outline" size={20} color={colors.tint} />
           </Pressable>
           {products.length > 0 && (
             <Pressable
@@ -145,7 +145,7 @@ export default function CatalogScreen() {
               accessibilityLabel="Экспортировать каталог в PDF"
               accessibilityRole="button"
             >
-              <Ionicons name="share-outline" size={20} color={Primary} />
+              <Ionicons name="share-outline" size={20} color={colors.tint} />
             </Pressable>
           )}
         </View>
